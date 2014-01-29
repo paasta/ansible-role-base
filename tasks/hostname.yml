@@ -1,0 +1,17 @@
+---
+
+- command: hostname "{{ hostname }}"
+  when: ansible_hostname != hostname
+  register: hostname_reg
+
+- name: reload the ansible_hostname and ansible_fqdn
+  setup: filter=ansible_*
+  when: hostname_reg.changed
+
+- name: sync the /etc/hostname file
+  template: src=hostname.j2 dest=/etc/hostname mode=0644 owner=root
+  when: hostname_reg.changed
+
+- name: sync the /etc/hosts file
+  template: src=hosts.j2 dest=/etc/hosts mode=0644 owner=root
+  when: hostname_reg.changed

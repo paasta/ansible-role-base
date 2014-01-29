@@ -1,0 +1,11 @@
+---
+
+- name: setup the loghost / enabled
+  template: src=loghost.conf.j2 dest=/etc/rsyslog.d/99-forwarding.conf mode=0644 owner=root
+  notify: reload rsyslog
+  when: loghost
+
+- name: setup the loghost / disabled
+  file: state=absent dest=/etc/rsyslog.d/99-loghost.conf
+  notify: reload rsyslog
+  when: not loghost

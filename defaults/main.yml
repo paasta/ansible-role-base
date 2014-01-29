@@ -1,0 +1,8 @@
+---
+app: unknown
+host_role: unknown
+
+# FIXME: This won't outside of AWS
+hostname: "{{ app }}-{{ host_role }}-{{ ohai_ec2.instance_id }}"
+
+loghost:
