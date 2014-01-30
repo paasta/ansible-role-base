@@ -1,8 +1,9 @@
 ---
 app: unknown
 host_role: unknown
+target: unknown
 
-# FIXME: This won't outside of AWS
-hostname: "{{ app }}-{{ host_role }}-{{ ohai_ec2.instance_id }}"
+# FIXME: This won't work outside of AWS
+hostname: "{{ app }}-{{ target }}-{{ host_role }}-{{ ohai_ec2.instance_id }}"
 
 loghost:
